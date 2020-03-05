@@ -33,4 +33,16 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy") && hasPowerup)
+        {
+            Rigidbody enemyRigidbody = collsion.gameObject.GetComponent<enemyRigidbody>();
+            Vector3 awayFromPlayer = collision.gameObject.transform.position - transform.position;
+
+            enemyRigidbody.AddForce(awayFromPlayer * powerUpStrength, ForceMode.Impulse);
+            Debug.Log("Collided with: " + collision.gameObject.name + "with powerup set to " + hasPowerup);
+        }
+    }
 }
