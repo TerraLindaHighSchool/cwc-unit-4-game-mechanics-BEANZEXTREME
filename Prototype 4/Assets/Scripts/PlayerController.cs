@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
         playerRb = GetComponent<Rigidbody>();
 
         focalPoint = GameObject.Find("Focal Point");
+        powerupIndicator.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -35,10 +36,9 @@ public class PlayerController : MonoBehaviour
         if(other.CompareTag("Powerup"))
         {
             hasPowerup = true;
-            Destroy(other.gameObject);
-            StartCoroutine(PowerupCountdownRoutine());
-
             powerupIndicator.gameObject.SetActive(true);
+            Destroy(other.gameObject);        
+            StartCoroutine(PowerupCountdownRoutine());      
         }
     }
 
@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(7);
         hasPowerup = false;
+        powerupIndicator.gameObject.SetActive(false);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -57,7 +58,7 @@ public class PlayerController : MonoBehaviour
 
             enemyRigidbody.AddForce(awayFromPlayer * powerupStrength, ForceMode.Impulse);
             Debug.Log("Collided with: " + collision.gameObject.name + "with powerup set to " + hasPowerup);
-            powerupIndicator.gameObject.SetActive(false);
+
         }
     }
 }
