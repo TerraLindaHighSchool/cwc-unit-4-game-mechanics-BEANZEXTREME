@@ -7,7 +7,7 @@ public class MoveUp : MonoBehaviour
     
     public float speed = 5.0f;
 
-    private float zDestroy = 10.0f;
+    private float zDestroy = 12.0f;
     private Rigidbody objectRb;
 
     // Start is called before the first frame update
