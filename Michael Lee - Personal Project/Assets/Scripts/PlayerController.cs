@@ -44,4 +44,22 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, zBound);
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("Player has collided with enemy");
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Money"))
+        {
+            Destroy(other.gameObject);
+        }
+    }
+
+    //when you hit money it sticks to you when oyou hit enemies it knocks your money off?
+    //cool but i dont know how to do
 }
